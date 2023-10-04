@@ -1,8 +1,11 @@
-import '../src/style.css'
-import { initializeApp } from 'firebase/app'
-import {getStorage, ref, uploadBytes } from 'firebase/storage'
+import '../src/style.css';
+import { initializeApp } from 'firebase/app';
+import {getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {v4} from 'uuid';
 
-const file = document.querySelector('#file')
+const files = document.querySelector('#file');
+const form = document.querySelector('.submitFile');
+
 const firebaseConfig = {
   apiKey: "AIzaSyBT_6OYaJYnd4oYcS01X1KGWPygWDTSOxM",
   authDomain: "photosintheclouds.firebaseapp.com",
@@ -18,14 +21,26 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
-function upLoaded (file){
-  const storageRef = ref(storage, 'some-child')
-  uploadBytes(storageRef, file).then( snapshot => {
-    console.log(snapshot);
-  })
+async function upLoaded(file){
+  const storageRef = ref(storage, v4())
+  await uploadBytes(storageRef, file)
+  let url = await getDownloadURL(storageRef)
+  return url
 }
 
-file.addEventListener("change",(ev) => {
-  const file = ev.target.files[0];
-  upLoaded(file)
+let file;
+
+files.addEventListener("change",(ev) => {
+  file = ev.target.files[0];
+});
+
+form.addEventListener("submit",async (ev) => {
+  ev.preventDefault();
+  try {
+    const result = await upLoaded(file);
+    console.log(result)
+  } catch (error) {
+    console.log(error);
+    alert('Fallo interno')
+  };
 });
