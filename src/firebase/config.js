@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {v4} from 'uuid';
+
 const firebaseConfig = {
   apiKey: "AIzaSyBT_6OYaJYnd4oYcS01X1KGWPygWDTSOxM",
   authDomain: "photosintheclouds.firebaseapp.com",
@@ -11,8 +12,6 @@ const firebaseConfig = {
   measurementId: "G-55437Z6K4S"
 };
 
-// Initialize Firebase
-//! Initialize Cloud Storage and get a reference to the service
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 

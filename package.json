@@ -4,16 +4,27 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "devT": "tailwind",
+    "dev": "webpack serve -- mode=development",
+    "build": "webpack --mode=development",
+    "preview": "vite preview",
+    "scanTailwind": "npx tailwindcss -i ./src/css/input.css -o ./dist/output.css --watch"
   },
   "devDependencies": {
     "standard": "^17.1.0",
-    "vite": "^4.4.5"
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.5",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "firebase": "^10.4.0",
     "uuid": "^9.0.1"
-  }
+  },
+  "description": "En este proyecto trabajare con Tailwind ya que es framework muy bueno y una heramainado de id unico",
+  "main": "tailwind.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

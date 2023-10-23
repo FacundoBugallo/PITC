@@ -1,14 +1,14 @@
-import './style.css'
-import { upLoaded } from './firebase/config'
+import { upLoaded } from './firebase/config.js';
 
-const files = document.querySelector('#file');
 const form = document.querySelector('.submitFile');
-
+const files = document.querySelector('#file');
 
 let file;
 
+
 files.addEventListener("change",(ev) => {
   file = ev.target.files[0];
+  console.log(file);
 });
 
 form.addEventListener("submit",async (ev) => {
