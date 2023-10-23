@@ -176,7 +176,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _firebase_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase/config.js */ \"./src/firebase/config.js\");\n\r\n\r\nconst form = document.querySelector('.submitFile');\r\nconst files = document.querySelector('#file');\r\n\r\nlet file;\r\n\r\n\r\nfiles.addEventListener(\"change\",(ev) => {\r\n  file = ev.target.files[0];\r\n  console.log(file);\r\n});\r\n\r\nform.addEventListener(\"submit\",async (ev) => {\r\n  ev.preventDefault();\r\n  try {\r\n    const result = await (0,_firebase_config_js__WEBPACK_IMPORTED_MODULE_0__.upLoaded)(file);\r\n    console.log(result)\r\n  } catch (error) {\r\n    console.log(error);\r\n    alert('Fallo interno')\r\n  };\r\n});\n\n//# sourceURL=webpack://pitc/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   $boxBar: () => (/* binding */ $boxBar)\n/* harmony export */ });\n/* harmony import */ var _firebase_config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firebase/config.js */ \"./src/firebase/config.js\");\n/* harmony import */ var _uploaderbar_bar_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./uploaderbar/bar.js */ \"./src/uploaderbar/bar.js\");\n\r\n\r\n\r\nconst form = document.querySelector('.submitFile');\r\nconst files = document.querySelector('#file');\r\n\r\nconst $boxBar = document.querySelector('#box-Bar');\r\n\r\nlet file;\r\n\r\n\r\nfiles.addEventListener(\"change\",(ev) => {\r\n  file = ev.target.files[0];\r\n  console.log(file);\r\n});\r\n\r\nform.addEventListener(\"submit\",async (ev) => {\r\n  ev.preventDefault();\r\n  try {\r\n    (0,_uploaderbar_bar_js__WEBPACK_IMPORTED_MODULE_1__.progressUpload)()\r\n    const result = await (0,_firebase_config_js__WEBPACK_IMPORTED_MODULE_0__.upLoaded)(file);\r\n    //llevarlo al Uploaded al Bar.js\r\n    console.log(result)\r\n  } catch (error) {\r\n    console.log(error);\r\n    alert('Fallo interno')\r\n  };\r\n});\r\n\n\n//# sourceURL=webpack://pitc/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/uploaderbar/bar.js":
+/*!********************************!*\
+  !*** ./src/uploaderbar/bar.js ***!
+  \********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   progressUpload: () => (/* binding */ progressUpload)\n/* harmony export */ });\n/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index.js */ \"./src/index.js\");\n \r\nasync function progressUpload (file) {\r\n  const $progress = document.createElement(\"progress\"),\r\n        $span = document.createElement(\"span\");\r\n\r\n  $progress.value = 0;\r\n  $progress.max = 100; \r\n\r\n  _index_js__WEBPACK_IMPORTED_MODULE_0__.$boxBar.insertAdjacentElement(\"afterend\", $progress);\r\n  _index_js__WEBPACK_IMPORTED_MODULE_0__.$boxBar.insertAdjacentElement(\"afterend\", $span);\r\n\r\n  const fileReader = new FileReader();\r\n  fileReader.readAsArrayURL(file);\r\n\r\n  fileReader.addEventListener(\"progress\", (ev)=>{\r\n    let progress = parseInt((ev.loaded * 100) / ev.total)\r\n    $progress.value = progress;\r\n    $span.innerHTML = `<b>${file.name} - ${progress} %</b>`\r\n  });\r\n\r\n  fileReader.addEventListener(\"loadend\", async (ev)=>{  \r\n  });\r\n}\n\n//# sourceURL=webpack://pitc/./src/uploaderbar/bar.js?");
 
 /***/ })
 
@@ -251,7 +261,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fir
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
 /******/ 	
 /******/ })()
