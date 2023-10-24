@@ -1,4 +1,3 @@
-import { upLoaded } from './firebase/config.js';
 import { progressUpload } from './uploaderbar/bar.js'
 
 const form = document.querySelector('.submitFile');
@@ -16,13 +15,5 @@ files.addEventListener("change",(ev) => {
 
 form.addEventListener("submit",async (ev) => {
   ev.preventDefault();
-  try {
-    progressUpload()
-    const result = await upLoaded(file);
-    //llevarlo al Uploaded al Bar.js
-    console.log(result)
-  } catch (error) {
-    console.log(error);
-    alert('Fallo interno')
-  };
+  progressUpload(file);
 });
